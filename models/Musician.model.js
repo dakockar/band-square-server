@@ -5,9 +5,12 @@ const MusicianSchema = new Schema({
   password: String,
   firstName: String,
   lastName: String,
-  imgUrl: String,
+  imgUrl: {
+    type: String,
+    default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYSprYSGY7wv-OyUUMHyEYhPtVO1juHDCtVg&usqp=CAU'
+  },
   location: String,
-  instrument: String,
+  instrument: Array,
   bandName: String,
   refUrl: String
 })
