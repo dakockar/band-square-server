@@ -8,6 +8,4 @@ router.get("/", (req, res, next) => {
 // example: router.use("/auth", authRoutes)
 
 
-
-
 module.exports = router;
