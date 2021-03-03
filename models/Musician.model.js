@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const MusicianSchema = new Schema({
-  email: { type: string, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   password: String,
   firstName: String,
   lastName: String,
