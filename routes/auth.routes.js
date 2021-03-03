@@ -39,10 +39,10 @@ router.post('/signup', (req, res, next) => {
   let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(password, salt);
     if(type === 'musician'){
-      MusicianModel.create({email, passwordHash: hash})
+      MusicianModel.create({email, password: hash})
       .then((user) => {
         // ensuring that we don't share the hash as well with the user
-        user.passwordHash = "***";
+        user.password = "***";
         res.status(200).json(user);
       })
       .catch((err) => {
@@ -62,10 +62,10 @@ router.post('/signup', (req, res, next) => {
       })
     }
     else{
-      OwnerModel.create({email, passwordHash: hash})
+      OwnerModel.create({email, password: hash})
       .then((user) => {
         // ensuring that we don't share the hash as well with the user
-        user.passwordHash = "***";
+        user.password = "***";
         res.status(200).json(user);
       })
       .catch((err) => {
@@ -111,10 +111,10 @@ router.post('/signin', (req, res, next) => {
     MusicianModel.findOne({email})
       .then((user) => {
         // checking for password match
-        bcrypt.compare(password, user.passwordHash)
+        bcrypt.compare(password, user.password)
           .then((doesItMatch) => {
             if(doesItMatch){
-              user.passwordHash = '***';
+              user.password = '***';
               req.session.loggedInUser = user;
               res.status(200).json(user)
             }
@@ -136,10 +136,10 @@ router.post('/signin', (req, res, next) => {
         OwnerModel.findOne({email})
         .then((user) => {
           // checking for password match
-          bcrypt.compare(password, user.passwordHash)
+          bcrypt.compare(password, user.password)
             .then((doesItMatch) => {
               if(doesItMatch){
-                user.passwordHash = '***';
+                user.password = '***';
                 req.session.loggedInUser = user;
                 res.status(200).json(user)
               }
@@ -167,7 +167,7 @@ router.post('/signin', (req, res, next) => {
       })
 })
 
-router.post('/logout', (req, res, next) => {
+router.post('/signout', (req, res, next) => {
   req.session.destroy();
   res.status(204).json({});
 })
