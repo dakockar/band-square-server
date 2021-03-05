@@ -15,7 +15,7 @@ const MusicianSchema = new Schema({
   refUrl: String,
   genre: Array,
   aboutMe: String,
-  type: String
+  type: { type: String, default: 'musician' }
 })
 
 const Musician = model("Musician", MusicianSchema);
