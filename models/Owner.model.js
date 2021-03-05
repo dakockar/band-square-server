@@ -6,7 +6,8 @@ const OwnerSchema = new Schema({
   firstName: String,
   lastName: String,
   imgUrl: String,
-  venues: Array
+  venues: Array,
+  type: String
 })
 
 

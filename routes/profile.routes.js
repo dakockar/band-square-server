@@ -18,9 +18,11 @@ router.get('/musician-profile/:userId', (req, res) => {
 
 router.patch('/musician-profile/:id', (req, res) => {
   let id = req.params.id
-  const{firstName, lastName, imgUrl, location, instrument, bandName} = req.body
-  MusicianModel.findByIdAndUpdate(id, {$set: {firstName, lastName, imgUrl, location, instrument, bandName}}, {new: true})
+  const{firstName, lastName, imgUrl, location, instrument, bandName, genre, aboutMe} = req.body
+  MusicianModel.findByIdAndUpdate(id, {$set: {firstName, lastName, imgUrl, location, instrument, bandName, genre, aboutMe}}, {new: true})
+  
     .then((response) => {
+      console.log('heloooooo', response)
       res.status(200).json(response)
     })
     .catch((err) => {
