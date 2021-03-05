@@ -12,7 +12,10 @@ const MusicianSchema = new Schema({
   location: String,
   instrument: Array,
   bandName: String,
-  refUrl: String
+  refUrl: String,
+  genre: Array,
+  aboutMe: String,
+  type: String
 })
 
 const Musician = model("Musician", MusicianSchema);
