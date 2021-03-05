@@ -19,7 +19,10 @@ router.get('/users', (req, res) => {
 
 
 router.get('/musician-profile/:userId', (req, res) => {
-  MusicianModel.findById(req.param.userId)
+
+  const { userId } = req.params;
+
+  MusicianModel.findById(userId)
     .then((response) => {
       res.status(200).json(response)
     })
@@ -31,12 +34,12 @@ router.get('/musician-profile/:userId', (req, res) => {
     })
 })
 
-router.patch('/musician-profile/:id', (req, res) => {
-  let id = req.params.id
+router.patch('/musician-profile/:userId', (req, res) => {
+  const { userId } = req.params;
 
   const { firstName, lastName, location, instrument, bandName, genre, aboutMe } = req.body;
 
-  MusicianModel.findByIdAndUpdate(id, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe } }, { new: true })
+  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe } }, { new: true })
     .then((response) => {
       console.log("inside findbyid", response);
       req.session.loggedInUser = response;
@@ -55,7 +58,7 @@ router.patch('/musician-profile/:id', (req, res) => {
 
 router.patch('/owner-profile/:ownerId', (req, res) => {
 
-  let ownerId = req.params.ownerId;
+  const { ownerId } = req.params;
   const { firstName, lastName } = req.body;
 
   OwnerModel.findByIdAndUpdate(ownerId, { $set: { firstName, lastName } }, { new: true })

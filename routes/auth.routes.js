@@ -206,7 +206,7 @@ router.post('/add-venue', (req, res, next) => {
 
 router.get('/venues/:ownerId', (req, res, next) => {
 
-  let ownerId = req.params.ownerId;
+  const { ownerId } = req.params;
 
   VenueModel.find({ ownerId })
     .populate("ownerId")
