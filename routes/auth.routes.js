@@ -1,8 +1,10 @@
 const router = require("express").Router();
 var bcrypt = require('bcryptjs');
 
-const MusicianModel = require('../models/Musician.model')
-const OwnerModel = require('../models/Owner.model')
+const MusicianModel = require('../models/Musician.model');
+const OwnerModel = require('../models/Owner.model');
+const VenueModel = require('../models/Venue.model');
+
 
 
 //POST ROUTE SIGNUP
@@ -169,8 +171,58 @@ router.post('/signin', (req, res, next) => {
 
 router.post('/signout', (req, res, next) => {
   req.session.destroy();
-  res.status(204).json({});
+  res.status(204).json({
+    message: "successfully signed out"
+  });
 })
+
+
+router.post('/add-venue', (req, res, next) => {
+  const { title, location, size, ownerId } = req.body;
+  // let owner = req.session.loggedInUser;
+
+  // SERVER SIDE VALIDATION
+  if (!title || !location || !size) {
+    res.status(500)
+      .json({
+        message: 'Please fill all the fields'
+      })
+    return
+  }
+
+  VenueModel.create({ title, location, size, ownerId })
+    .then((venue) => {
+      res.status(200).json(venue);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        errorMessage: "Venue creation failed",
+        message: err
+      });
+    });
+})
+
+
+router.get('/venues/:ownerId', (req, res, next) => {
+
+  let ownerId = req.params.ownerId;
+
+  VenueModel.find({ ownerId })
+    .populate("ownerId")
+    .then((venues) => {
+      res.status(200).json(venues);
+    })
+    .catch((err) => {
+      console.log("getting venues failed");
+      res.status(500).json({
+        message: err
+      })
+    });
+
+
+})
+
 
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
@@ -183,7 +235,6 @@ const isLoggedIn = (req, res, next) => {
     })
   }
 };
-
 
 
 

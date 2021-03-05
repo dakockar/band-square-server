@@ -5,7 +5,7 @@ const VenueSchema = new Schema({
   imgUrl: String,
   location: String,
   size: Number,
-  owner: { type: Schema.Types.ObjectId, ref: "Owner" }
+  ownerId: { type: Schema.Types.ObjectId, ref: "Owner" }
 })
 
 const Venue = model("Venue", VenueSchema);

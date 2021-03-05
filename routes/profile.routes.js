@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const MusicianModel = require('../models/Musician.model')
+const OwnerModel = require('../models/Owner.model')
 
 
 router.get('/musician-profile/:userId', (req, res) => {
@@ -36,6 +37,28 @@ router.patch('/musician-profile/:id', (req, res) => {
       })
     })
 })
+
+
+router.patch('/owner-profile/:ownerId', (req, res) => {
+
+  let ownerId = req.params.ownerId;
+  const { firstName, lastName } = req.body;
+
+  OwnerModel.findByIdAndUpdate(ownerId, { $set: { firstName, lastName } }, { new: true })
+    .then((response) => {
+      req.session.loggedInUser = response;
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: "something went wrong",
+        message: err
+      })
+    });
+
+})
+
 
 
 module.exports = router
