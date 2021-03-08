@@ -177,62 +177,7 @@ router.post('/signout', (req, res, next) => {
 })
 
 
-router.post('/add-venue', (req, res, next) => {
-  const { title, location, size, ownerId } = req.body;
-  // let owner = req.session.loggedInUser;
 
-  // SERVER SIDE VALIDATION
-  if (!title || !location || !size) {
-    res.status(500)
-      .json({
-        message: 'Please fill all the fields'
-      })
-    return
-  }
-
-  VenueModel.create({ title, location, size, ownerId })
-    .then((venue) => {
-      res.status(200).json(venue);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        errorMessage: "Venue creation failed",
-        message: err
-      });
-    });
-})
-
-
-router.get('/venues/:ownerId', (req, res, next) => {
-
-  let ownerId = req.params.ownerId;
-
-  VenueModel.find({ ownerId })
-    .populate("ownerId")
-    .then((venues) => {
-      res.status(200).json(venues);
-    })
-    .catch((err) => {
-      console.log("getting venues failed");
-      res.status(500).json({
-        message: err
-      })
-    });
-})
-
-router.get('/venues', (req, res, next) => {
-  VenueModel.find()
-    .then((users) => {
-      res.status(200).json(users)
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: 'Something went wrong',
-        message: err
-      })
-    })
-})
 
 
 const isLoggedIn = (req, res, next) => {
