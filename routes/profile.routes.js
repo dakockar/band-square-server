@@ -52,9 +52,9 @@ router.get('/musician-profile/:userId', (req, res) => {
 router.patch('/musician-profile/:userId', (req, res) => {
   const { userId } = req.params;
 
-  const { firstName, lastName, location, instrument, bandName, genre, aboutMe, imgUrl } = req.body;
+  const { firstName, lastName, location, instrument, bandName, genre, aboutMe } = req.body;
 
-  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe, imgUrl } }, { new: true })
+  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe } }, { new: true })
     .then((response) => {
       console.log("inside findbyid", response);
       req.session.loggedInUser = response;
@@ -71,24 +71,60 @@ router.patch('/musician-profile/:userId', (req, res) => {
 })
 
 
-// upload profile picture for musicians
-router.patch('/upload/:musicianId', (req, res, next) => {
-  const { musicianId } = req.params;
-  const { imgUrl } = req.body;
-  // console.log(req.body);
+// upload profile picture for musicians and owners
+router.patch('/upload/:userId', (req, res, next) => {
+  const { userId } = req.params;
+  const { imgUrl, type } = req.body;
+  console.log(req.body);
 
-  MusicianModel.findByIdAndUpdate(musicianId, { $set: { imgUrl } }, { new: true })
-    .then((response) => {
-      req.session.loggedInUser = response;
-      // console.log(response);
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        message: err
+  if (type === "musician") {
+    MusicianModel.findByIdAndUpdate(userId, { $set: { imgUrl } }, { new: true })
+      .then((response) => {
+        req.session.loggedInUser = response;
+        // console.log(response);
+        res.status(200).json(response);
       })
-    });
+      .catch((err) => {
+        res.status(500).json({
+          message: err
+        })
+      });
+  }
+  else if (type === "owner") {
+    OwnerModel.findByIdAndUpdate(userId, { $set: { imgUrl } }, { new: true })
+      .then((response) => {
+        req.session.loggedInUser = response;
+        // console.log(response);
+        res.status(200).json(response);
+      })
+      .catch((err) => {
+        res.status(500).json({
+          message: err
+        })
+      });
+  }
 })
+
+
+// upload profile picture for owners
+// router.patch('/upload/:ownerId', (req, res, next) => {
+//   const { ownerId } = req.params;
+//   const { imgUrl } = req.body;
+//   // console.log(req.body);
+
+//   OwnerModel.findByIdAndUpdate(ownerId, { $set: { imgUrl } }, { new: true })
+//     .then((response) => {
+//       req.session.loggedInUser = response;
+//       // console.log(response);
+//       res.status(200).json(response);
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         message: err
+//       })
+//     });
+// })
+
 
 
 router.patch('/owner-profile/:ownerId', (req, res) => {
