@@ -210,9 +210,5 @@ router.delete('/venue/:venueId', (req, res, next) => {
         message: err
       })
     });
-
-
 })
-
-
 module.exports = router
