@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const { response } = require("express");
 const MusicianModel = require('../models/Musician.model')
 const OwnerModel = require('../models/Owner.model')
 const VenueModel = require('../models/Venue.model')
@@ -24,8 +25,11 @@ router.get('/venues', (req, res, next) => {
     .then((venues) => {
       console.log("all venues: ", venues)
       res.status(200).json(venues);
-    }).catch((err) => {
-
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err
+      })
     });
 })
 
@@ -64,6 +68,26 @@ router.patch('/musician-profile/:userId', (req, res) => {
         message: err
       })
     })
+})
+
+
+// upload profile picture for musicians
+router.patch('/upload/:musicianId', (req, res, next) => {
+  const { musicianId } = req.params;
+  const { imgUrl } = req.body;
+  // console.log(req.body);
+
+  MusicianModel.findByIdAndUpdate(musicianId, { $set: { imgUrl } }, { new: true })
+    .then((response) => {
+      req.session.loggedInUser = response;
+      // console.log(response);
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err
+      })
+    });
 })
 
 
