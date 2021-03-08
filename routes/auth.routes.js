@@ -219,8 +219,19 @@ router.get('/venues/:ownerId', (req, res, next) => {
         message: err
       })
     });
+})
 
-
+router.get('/venues', (req, res, next) => {
+  VenueModel.find()
+    .then((users) => {
+      res.status(200).json(users)
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: 'Something went wrong',
+        message: err
+      })
+    })
 })
 
 
