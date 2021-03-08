@@ -176,7 +176,7 @@ router.get('/venuesDetails/:venueId', (req, res) => {
 
 
 router.post('/add-venue', (req, res, next) => {
-  const { title, location, size, ownerId } = req.body;
+  const { title, location, size, ownerId, imgUrl } = req.body;
   // let owner = req.session.loggedInUser;
 
   // SERVER SIDE VALIDATION
@@ -188,7 +188,7 @@ router.post('/add-venue', (req, res, next) => {
     return
   }
 
-  VenueModel.create({ title, location, size, ownerId })
+  VenueModel.create({ title, location, size, ownerId, imgUrl })
     .then((venue) => {
       res.status(200).json(venue);
     })
@@ -239,9 +239,9 @@ router.get('/venue/:venueId', (req, res, next) => {
 
 router.patch('/venue/:venueId', (req, res, next) => {
   const { venueId } = req.params;
-  const { title, location, size } = req.body;
+  const { title, location, size, imgUrl } = req.body;
 
-  VenueModel.findByIdAndUpdate(venueId, { title, location, size }, { new: true })
+  VenueModel.findByIdAndUpdate(venueId, { title, location, size, imgUrl }, { new: true })
     .then((venue) => {
       console.log("venue edited: ", venue);
       res.status(200).json(venue);
