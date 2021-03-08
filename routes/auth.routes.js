@@ -1,5 +1,6 @@
 const router = require("express").Router();
 var bcrypt = require('bcryptjs');
+const { Socket } = require("socket.io");
 
 const MusicianModel = require('../models/Musician.model');
 const OwnerModel = require('../models/Owner.model');
@@ -119,6 +120,16 @@ router.post('/signin', (req, res, next) => {
             user.password = '***';
             req.session.loggedInUser = user;
             res.status(200).json(user)
+            const me = () => async dispatch => {
+              try {
+                const { data } = await axios.get('/user');
+                console.log('data from try-------',data)
+                dispatch(getUser(data));
+                socket.emit('logged-in', data._id)
+              } catch (err) {
+                console.log(err)
+              }
+            }
           }
           else {
             res.status(500).json({

@@ -48,9 +48,9 @@ router.get('/musician-profile/:userId', (req, res) => {
 router.patch('/musician-profile/:userId', (req, res) => {
   const { userId } = req.params;
 
-  const { firstName, lastName, location, instrument, bandName, genre, aboutMe } = req.body;
+  const { firstName, lastName, location, instrument, bandName, genre, aboutMe, imgUrl } = req.body;
 
-  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe } }, { new: true })
+  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe, imgUrl } }, { new: true })
     .then((response) => {
       console.log("inside findbyid", response);
       req.session.loggedInUser = response;
@@ -88,7 +88,7 @@ router.patch('/owner-profile/:ownerId', (req, res) => {
 })
 
 
-router.get('/search/musician/:musicianId', (req, res) => {
+router.get('/musician/:musicianId', (req, res) => {
   MusicianModel.findById(req.params.musicianId)
     .then((response) => {
       res.status(200).json(response)
@@ -96,6 +96,19 @@ router.get('/search/musician/:musicianId', (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: 'Something went wrong',
+        message: err
+      })
+    })
+})
+
+router.get('/venuesDetails/:venueId', (req, res) => {
+  VenueModel.findById(req.params.venueId)
+    .then((response) => {
+      res.status(200).json(response)
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: 'Something went wrong with venues',
         message: err
       })
     })

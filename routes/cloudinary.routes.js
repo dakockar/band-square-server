@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 const uploader = require('../config/cloudinary.config');
 
-router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
+router.patch('/upload', uploader.single("imageUrl"), (req, res, next) => {
   // the uploader.single() callback will send the file to cloudinary and get you and obj with the url in return
   console.log('file is: ', req.file)
   
