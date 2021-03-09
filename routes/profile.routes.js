@@ -4,6 +4,7 @@ const { response } = require("express");
 const MusicianModel = require('../models/Musician.model')
 const OwnerModel = require('../models/Owner.model')
 const VenueModel = require('../models/Venue.model')
+const MessageModel = require('../models/Message.model')
 
 
 router.get('/users', (req, res) => {
@@ -271,4 +272,37 @@ router.delete('/venue/:venueId', (req, res, next) => {
       })
     });
 })
+
+router.get('/chat/:userId', (req, res, next) => {
+  const {userId} = req.params
+  MessageModel.find({to: userId})
+    .then((response) => {
+      res.status(200).json(response)
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: err
+      })
+    })
+})
+
+router.get('/chats/:room', (req, res, next) => {
+  console.log('In the route')
+  const {room} = req.params
+  MessageModel.find({room: room})
+    .then((response) => {
+      console.log('---response---',response)
+      res.status(200).json(response)
+      
+    })
+    .catch((err) => {
+      console.log('errrrrrorrr')
+      res.status(500).json({
+        message: err
+      })
+    })
+})
+
+
+
 module.exports = router
