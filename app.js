@@ -16,43 +16,18 @@ const app = express();
 
 // io.on('connection', socket => {})
 // httpServer.listen
+const PORT = process.env.PORT || 5005;
+
+
+
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port http://localhost:${PORT}`);
+});
 
 
 
 // ℹ️ This function is getting exported from the config folder. It runs most middlewares
 require('./config')(app);
-
-// //SOCKET SERVER
-// const socket = require("socket.io");
-// const cors = require("cors");
-
-// app.use(cors());
-// app.use(express.json());
-
-// const server = app.listen("3002", () => {
-//   console.log("Server Running on Port 3002...");
-// });
-
-// io = socket(server);
-
-// io.on("connection", (socket) => {
-//   console.log(socket.id);
-
-//   socket.on("join_room", (data) => {
-//     socket.join(data);
-//     console.log("User Joined Room: " + data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     console.log(data);
-//     socket.to(data.room).emit("receive_message", data.content);
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("USER DISCONNECTED");
-//   });
-// });
-
 
 
 const session = require('express-session');
@@ -73,7 +48,6 @@ app.use(session({
 
 
 
-
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controled from the routes/index.js
 const allRoutes = require('./routes');
@@ -90,5 +64,46 @@ app.use('/api', cloudinaryRoutes)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
+
+
+
+
+// //SOCKET SERVER
+const socket = require("socket.io");
+// const cors = require("cors");
+
+// app.use(cors());
+// app.use(express.json());
+
+// const server = app.listen("3002", () => {
+//   console.log("Server Running on Port 3002...");
+// });
+
+// const server = require("./server");
+
+io = socket(server);
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+
+
+  // TODO: probably we need to join with a model (message model)
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log("User Joined Room: " + data);
+  });
+
+  socket.on("send_message", (data) => {
+    console.log(data);
+    socket.to(data.room).emit("receive_message", data.content);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("USER DISCONNECTED");
+  });
+});
+
+
+
 
 module.exports = app;
