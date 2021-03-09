@@ -88,6 +88,9 @@ const socket = require("socket.io");
 // });
 
 // const server = require("./server");
+const MessageModel = require('./models/Message.model')
+
+
 
 io = socket(server);
 
@@ -102,8 +105,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    console.log(data);
-    socket.to(data.room).emit("receive_message", data.content);
+    const {to, from, content, room } = data
+    MessageModel.create({to, from, author: content.author, message: content.message, room})
+      .then((response) => {
+        console.log('send message',response);
+        socket.to(response.room).emit("receive_message", response.message);
+      })
+      .catch((err) => {
+        console.log('err whith messages', err)
+      })
+    
   });
 
   socket.on("disconnect", () => {
