@@ -95,7 +95,7 @@ const MessageModel = require('./models/Message.model')
 io = socket(server);
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  // console.log(socket.id);
 
 
   // TODO: probably we need to join with a model (message model)
