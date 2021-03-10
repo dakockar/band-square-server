@@ -110,27 +110,6 @@ router.patch('/upload/:userId', (req, res, next) => {
 })
 
 
-// upload profile picture for owners
-// router.patch('/upload/:ownerId', (req, res, next) => {
-//   const { ownerId } = req.params;
-//   const { imgUrl } = req.body;
-//   // console.log(req.body);
-
-//   OwnerModel.findByIdAndUpdate(ownerId, { $set: { imgUrl } }, { new: true })
-//     .then((response) => {
-//       req.session.loggedInUser = response;
-//       // console.log(response);
-//       res.status(200).json(response);
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err
-//       })
-//     });
-// })
-
-
-
 router.patch('/owner-profile/:ownerId', (req, res) => {
 
   const { ownerId } = req.params;
@@ -160,19 +139,6 @@ router.get('/musician/:musicianId', (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: 'Something went wrong getting musician',
-        message: err
-      })
-    })
-})
-
-router.get('/venuesDetails/:venueId', (req, res) => {
-  VenueModel.findById(req.params.venueId)
-    .then((response) => {
-      res.status(200).json(response)
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: 'Something went wrong with venues',
         message: err
       })
     })
