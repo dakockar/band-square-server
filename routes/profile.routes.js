@@ -53,9 +53,9 @@ router.get('/musician-profile/:userId', (req, res) => {
 router.patch('/musician-profile/:userId', (req, res) => {
   const { userId } = req.params;
 
-  const { firstName, lastName, location, instrument, bandName, genre, aboutMe } = req.body;
+  const { firstName, lastName, location, instrument, bandName, genre, aboutMe, lookingFor } = req.body;
 
-  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe } }, { new: true })
+  MusicianModel.findByIdAndUpdate(userId, { $set: { firstName, lastName, location, instrument, bandName, genre, aboutMe, lookingFor } }, { new: true })
     .then((response) => {
       console.log("inside findbyid", response);
       req.session.loggedInUser = response;
@@ -274,8 +274,8 @@ router.delete('/venue/:venueId', (req, res, next) => {
 })
 
 router.get('/chat/:userId', (req, res, next) => {
-  const {userId} = req.params
-  MessageModel.find({to: userId})
+  const { userId } = req.params
+  MessageModel.find({ to: userId })
     .then((response) => {
       res.status(200).json(response)
     })
@@ -288,12 +288,12 @@ router.get('/chat/:userId', (req, res, next) => {
 
 router.get('/chats/:room', (req, res, next) => {
   console.log('In the route')
-  const {room} = req.params
-  MessageModel.find({room: room})
+  const { room } = req.params
+  MessageModel.find({ room: room })
     .then((response) => {
-      console.log('---response---',response)
+      console.log('---response---', response)
       res.status(200).json(response)
-      
+
     })
     .catch((err) => {
       console.log('errrrrrorrr')

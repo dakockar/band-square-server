@@ -12,6 +12,7 @@ const MusicianSchema = new Schema({
   location: String,
   instrument: Array,
   bandName: String,
+  lookingFor: String,
   refUrl: String,
   genre: Array,
   aboutMe: String,
