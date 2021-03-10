@@ -14,7 +14,7 @@ router.get('/users', (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: 'Something went wrong',
+        error: 'Something went wrong with users',
         message: err
       })
     })
@@ -29,6 +29,7 @@ router.get('/venues', (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
+        error: 'Something went wrong with the venues',
         message: err
       })
     });
@@ -44,7 +45,7 @@ router.get('/musician-profile/:userId', (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: 'Something went wrong',
+        error: 'Something went wrong with musician-profile',
         message: err
       })
     })
@@ -65,7 +66,7 @@ router.patch('/musician-profile/:userId', (req, res) => {
     .catch((err) => {
       console.log(err)
       res.status(500).json({
-        error: 'Something went wrong',
+        error: 'Something went wrong while updating musician-profile',
         message: err
       })
     })
@@ -87,6 +88,7 @@ router.patch('/upload/:userId', (req, res, next) => {
       })
       .catch((err) => {
         res.status(500).json({
+          error: 'Something went wrong uploading picture musician',
           message: err
         })
       });
@@ -100,6 +102,7 @@ router.patch('/upload/:userId', (req, res, next) => {
       })
       .catch((err) => {
         res.status(500).json({
+          error: 'Something went wrong uploading picture owner',
           message: err
         })
       });
@@ -141,7 +144,7 @@ router.patch('/owner-profile/:ownerId', (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: "something went wrong",
+        error: "something went wrong editing owner",
         message: err
       })
     });
@@ -156,7 +159,7 @@ router.get('/musician/:musicianId', (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: 'Something went wrong',
+        error: 'Something went wrong getting musician',
         message: err
       })
     })
@@ -212,8 +215,8 @@ router.get('/venues/:ownerId', (req, res, next) => {
       res.status(200).json(venues);
     })
     .catch((err) => {
-      console.log("getting venues failed");
       res.status(500).json({
+        error: 'Something went wrong when finding venues owner',
         message: err
       })
     });
@@ -230,8 +233,8 @@ router.get('/venue/:venueId', (req, res, next) => {
       res.status(200).json(venue);
     })
     .catch((err) => {
-      console.log("can't get venue");
       res.status(500).json({
+        error: 'Getting venue failed',
         message: err
       })
     });
@@ -248,8 +251,8 @@ router.patch('/venue/:venueId', (req, res, next) => {
       res.status(200).json(venue);
     })
     .catch((err) => {
-      console.log("edit venue failed");
       res.status(500).json({
+        error: 'Editing venue failed',
         message: err
       })
     });
@@ -266,8 +269,8 @@ router.delete('/venue/:venueId', (req, res, next) => {
       res.status(200).json(deletedVenue)
     })
     .catch((err) => {
-      console.log("venue couldn't be deleted");
       res.status(500).json({
+        error: 'Venue could not be deleted',
         message: err
       })
     });
@@ -281,6 +284,7 @@ router.get('/chat/:userId', (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
+        error: 'Something went wrong while getting chat',
         message: err
       })
     })
@@ -298,6 +302,7 @@ router.get('/chats/:room', (req, res, next) => {
     .catch((err) => {
       console.log('errrrrrorrr')
       res.status(500).json({
+        error: 'somethign went wrong whith chat rooms',
         message: err
       })
     })
