@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.0e33ced1.chunk.css",
-    "main.js": "/static/js/main.57f9d0e6.chunk.js",
-    "main.js.map": "/static/js/main.57f9d0e6.chunk.js.map",
+    "main.css": "/static/css/main.43758983.chunk.css",
+    "main.js": "/static/js/main.023824eb.chunk.js",
+    "main.js.map": "/static/js/main.023824eb.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1cef4360.js",
     "runtime-main.js.map": "/static/js/runtime-main.1cef4360.js.map",
     "static/css/2.150d169a.chunk.css": "/static/css/2.150d169a.chunk.css",
-    "static/js/2.4bf66634.chunk.js": "/static/js/2.4bf66634.chunk.js",
-    "static/js/2.4bf66634.chunk.js.map": "/static/js/2.4bf66634.chunk.js.map",
+    "static/js/2.b13f90e9.chunk.js": "/static/js/2.b13f90e9.chunk.js",
+    "static/js/2.b13f90e9.chunk.js.map": "/static/js/2.b13f90e9.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.150d169a.chunk.css.map": "/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.0e33ced1.chunk.css.map": "/static/css/main.0e33ced1.chunk.css.map",
-    "static/js/2.4bf66634.chunk.js.LICENSE.txt": "/static/js/2.4bf66634.chunk.js.LICENSE.txt",
+    "static/css/main.43758983.chunk.css.map": "/static/css/main.43758983.chunk.css.map",
+    "static/js/2.b13f90e9.chunk.js.LICENSE.txt": "/static/js/2.b13f90e9.chunk.js.LICENSE.txt",
     "static/media/bandsquare-logo.6fbee2ec.png": "/static/media/bandsquare-logo.6fbee2ec.png",
-    "static/media/App.css": "/static/media/glenn-van-de-wiel-DWHSc8o8K9Y-unsplash.4e2b1a2a.jpg",
+    "static/media/App.css": "/static/media/music-6062347.3788ab42.jpg",
     "static/media/rock-bg.0ed21121.jpg": "/static/media/rock-bg.0ed21121.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.1cef4360.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.4bf66634.chunk.js",
-    "static/css/main.0e33ced1.chunk.css",
-    "static/js/main.57f9d0e6.chunk.js"
+    "static/js/2.b13f90e9.chunk.js",
+    "static/css/main.43758983.chunk.css",
+    "static/js/main.023824eb.chunk.js"
   ]
 }
