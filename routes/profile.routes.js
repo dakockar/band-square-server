@@ -256,14 +256,13 @@ router.get('/chat/:userId', (req, res, next) => {
     })
 })
 
-router.get('/chats/:room', (req, res, next) => {
-  console.log('In the route')
+router.get('/messages/:room', (req, res, next) => {
+  // console.log('In the route')
   const { room } = req.params
   MessageModel.find({ room: room })
     .then((response) => {
-      console.log('---response---', response)
+      console.log('getting messages in the room:', response)
       res.status(200).json(response)
-
     })
     .catch((err) => {
       console.log('errrrrrorrr')

@@ -66,8 +66,8 @@ const cloudinaryRoutes = require('./routes/cloudinary.routes')
 app.use('/api', cloudinaryRoutes)
 
 app.use((req, res, next) => {
-	// If no routes match, send them the React HTML.
-	res.sendFile(__dirname + "/public/index.html");
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
@@ -105,16 +105,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    const {to, from, content, room } = data
-    MessageModel.create({to, from, author: content.author, message: content.message, room})
+    console.log(data);
+    const { to, from, content, room } = data
+    console.log(room);
+    MessageModel.create({ to, from, author: content.author, message: content.message, room })
       .then((response) => {
-        console.log('send message',response);
+        console.log('send message', response);
         socket.to(response.room).emit("receive_message", response.message);
       })
       .catch((err) => {
-        console.log('err whith messages', err)
+        console.log('error while creating message', err)
       })
-    
+
   });
 
   socket.on("disconnect", () => {
