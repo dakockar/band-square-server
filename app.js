@@ -106,12 +106,12 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     console.log(data);
-    const { to, from, content, room } = data
+    const { to, from, author, message, room } = data
     console.log(room);
-    MessageModel.create({ to, from, author: content.author, message: content.message, room })
+    MessageModel.create({ to, from, author:author, message:message, room })
       .then((response) => {
         console.log('send message', response);
-        socket.to(response.room).emit("receive_message", response.message);
+        socket.to(response.room).emit("receive_message", response);
       })
       .catch((err) => {
         console.log('error while creating message', err)
