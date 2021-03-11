@@ -98,7 +98,6 @@ io.on("connection", (socket) => {
   // console.log(socket.id);
 
 
-  // TODO: probably we need to join with a model (message model)
   socket.on("join_room", (data) => {
     socket.join(data);
     console.log("User Joined Room: " + data);
@@ -108,7 +107,7 @@ io.on("connection", (socket) => {
     console.log(data);
     const { to, from, author, message, room } = data
     console.log(room);
-    MessageModel.create({ to, from, author:author, message:message, room })
+    MessageModel.create({ to, from, author: author, message: message, room })
       .then((response) => {
         console.log('send message', response);
         socket.to(response.room).emit("receive_message", response);
