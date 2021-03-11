@@ -95,21 +95,21 @@ router.post('/signup', (req, res, next) => {
 router.post('/signin', (req, res, next) => {
   const { email, password } = req.body;
   // -----SERVER SIDE VALIDATION ----------
-  /*
+  
   if ( !email || !password) {
       res.status(500).json({
-          error: 'Please enter Username. email and password',
+        errorMessage: 'Please enter email and password',
      })
     return;  
   }
-  const myRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
-  if (!myRegex.test(email)) {
-      res.status(500).json({
-          error: 'Email format not correct',
-      })
-      return;  
-  }
-  */
+  // const myRegex = new RegExp(/^[a-z0-9](?!.*?[^\na-z0-9]{2})[^\s@]+@[^\s@]+\.[^\s@]+[a-z0-9]$/);
+  // if (!myRegex.test(email)) {
+  //     res.status(500).json({
+  //         error: 'Email format not correct',
+  //     })
+  //     return;  
+  // }
+  
 
   MusicianModel.findOne({ email })
     .then((user) => {
@@ -133,14 +133,14 @@ router.post('/signin', (req, res, next) => {
           }
           else {
             res.status(500).json({
-              error: 'Passwords don\'t match',
+              errorMessage: 'Passwords don\'t match',
             })
             return;
           }
         })
         .catch((err) => {
           res.status(500).json({
-            error: err
+            errorMessage: 'Something went wrong'
           })
           return
         });
@@ -165,14 +165,15 @@ router.post('/signin', (req, res, next) => {
             })
             .catch((err) => {
               res.status(500).json({
-                error: err
+                errorMessage: 'something went wrong',
+                message: err
               })
               return
             });
         })
         .catch(() => {
           res.status(500).json({
-            error: 'Wrong email',
+            errorMessage: 'Wrong email',
             message: err
           })
           return;
