@@ -110,27 +110,6 @@ router.patch('/upload/:userId', (req, res, next) => {
 })
 
 
-// upload profile picture for owners
-// router.patch('/upload/:ownerId', (req, res, next) => {
-//   const { ownerId } = req.params;
-//   const { imgUrl } = req.body;
-//   // console.log(req.body);
-
-//   OwnerModel.findByIdAndUpdate(ownerId, { $set: { imgUrl } }, { new: true })
-//     .then((response) => {
-//       req.session.loggedInUser = response;
-//       // console.log(response);
-//       res.status(200).json(response);
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err
-//       })
-//     });
-// })
-
-
-
 router.patch('/owner-profile/:ownerId', (req, res) => {
 
   const { ownerId } = req.params;
@@ -160,19 +139,6 @@ router.get('/musician/:musicianId', (req, res) => {
     .catch((err) => {
       res.status(500).json({
         error: 'Something went wrong getting musician',
-        message: err
-      })
-    })
-})
-
-router.get('/venuesDetails/:venueId', (req, res) => {
-  VenueModel.findById(req.params.venueId)
-    .then((response) => {
-      res.status(200).json(response)
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: 'Something went wrong with venues',
         message: err
       })
     })
@@ -290,14 +256,13 @@ router.get('/chat/:userId', (req, res, next) => {
     })
 })
 
-router.get('/chats/:room', (req, res, next) => {
-  console.log('In the route')
+router.get('/messages/:room', (req, res, next) => {
+  // console.log('In the route')
   const { room } = req.params
   MessageModel.find({ room: room })
     .then((response) => {
-      console.log('---response---', response)
+      console.log('getting messages in the room:', response)
       res.status(200).json(response)
-
     })
     .catch((err) => {
       console.log('errrrrrorrr')
