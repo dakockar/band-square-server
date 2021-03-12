@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.e55d5f08.chunk.css",
-    "main.js": "/static/js/main.69e5394f.chunk.js",
-    "main.js.map": "/static/js/main.69e5394f.chunk.js.map",
+    "main.css": "/static/css/main.df5fb19f.chunk.css",
+    "main.js": "/static/js/main.828b2ea9.chunk.js",
+    "main.js.map": "/static/js/main.828b2ea9.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.1cef4360.js",
     "runtime-main.js.map": "/static/js/runtime-main.1cef4360.js.map",
     "static/css/2.150d169a.chunk.css": "/static/css/2.150d169a.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.888a2862.chunk.js.map": "/static/js/2.888a2862.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.150d169a.chunk.css.map": "/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.e55d5f08.chunk.css.map": "/static/css/main.e55d5f08.chunk.css.map",
+    "static/css/main.df5fb19f.chunk.css.map": "/static/css/main.df5fb19f.chunk.css.map",
     "static/js/2.888a2862.chunk.js.LICENSE.txt": "/static/js/2.888a2862.chunk.js.LICENSE.txt",
     "static/media/bandsquare-logo.6055a7ca.png": "/static/media/bandsquare-logo.6055a7ca.png",
     "static/media/App.css": "/static/media/neonbrand-practice.9a7f4e4f.jpg",
@@ -20,7 +20,7 @@
     "static/js/runtime-main.1cef4360.js",
     "static/css/2.150d169a.chunk.css",
     "static/js/2.888a2862.chunk.js",
-    "static/css/main.e55d5f08.chunk.css",
-    "static/js/main.69e5394f.chunk.js"
+    "static/css/main.df5fb19f.chunk.css",
+    "static/js/main.828b2ea9.chunk.js"
   ]
 }
